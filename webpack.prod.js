@@ -4,7 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ArchivePlugin = require('webpack-archive-plugin');
 const common = require('./webpack.common.js');
 
-const name = 'test';
+const name = 'dist';
 
 module.exports = merge(common, {
 devtool: 'inline-cheap-module-source-map',
@@ -12,10 +12,11 @@ plugins: [
     new CleanWebpackPlugin([name]),
     new UglifyJSPlugin({
       sourceMap: true,
-      comments: false
+      parallel: true,
+      cache: true
     }),
     new ArchivePlugin({
-      output: './zip/' + name,
+      output: './zip/'+name,
       format: 'zip'
     })
   ]

@@ -3,13 +3,15 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "plugins": [
     "react"
   ],
   "rules": {
     "no-debugger": 0,
+    "no-unused-vars": 1,
     "no-console": 0,
     "new-cap": 0,
     "strict": 0,

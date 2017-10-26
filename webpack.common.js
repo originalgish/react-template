@@ -12,7 +12,7 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'test'),
+    path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
   plugins: [
@@ -27,12 +27,12 @@ module.exports = {
     loaders: [
       {
         test: /\.js$/,
-        loaders: ['babel-loader'],
+        loaders: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/ 
       },
       {
         test: /\.jsx$/,
-        loaders: ['babel-loader'],
+        loaders: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/ 
       },
       {
