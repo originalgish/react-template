@@ -1,7 +1,7 @@
 const merge = require('webpack-merge');
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ArchivePlugin = require('webpack-archive-plugin');
+const ZipPlugin = require('zip-webpack-plugin');
 const common = require('./webpack.common.js');
 
 const name = 'dist';
@@ -15,9 +15,9 @@ plugins: [
       parallel: true,
       cache: true
     }),
-    new ArchivePlugin({
-      output: './zip/'+name,
-      format: 'zip'
+    new ZipPlugin({
+      path: '../zip/',
+      filename: name + '.zip'
     })
   ]
 });
