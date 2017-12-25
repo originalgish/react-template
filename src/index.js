@@ -6,11 +6,14 @@ import configureStore from './store/configureStore';
 import { HashRouter } from 'react-router-dom';
 import App from './containers/App';
 
-import Fastclick from 'fastclick';
+// import Fastclick from 'fastclick';
 
-document.addEventListener('DOMContentLoaded', () => {
-  Fastclick.attach(document.body);
-});
+// document.addEventListener('DOMContentLoaded', () => {
+//   Fastclick.attach(document.body);
+// });
+
+import initReactFastclick from 'react-fastclick';
+initReactFastclick();
 
 const store = configureStore()
 

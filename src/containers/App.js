@@ -12,7 +12,6 @@ class App extends Component {
   render() {
     const { page } = this.props
     const { setYear } = this.props.pageActions
-    console.log(this.props);
     
     return (
       <div className='row'>
