@@ -1,36 +1,18 @@
 import React, { Component } from 'react'
-//import { Route, Switch, Redirect, withRouter} from 'react-router-dom';
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import Page from '../components/Page'
-import * as pageActions from '../actions/PageActions'
 
-import './app.scss';
-import '../styles/normalize.scss';
+import Main from '../components/Main/Main'
+import Footer from '../components/Footer/Footer'
 
+import '../style/style.scss';
 class App extends Component {
   render() {
-    const { page } = this.props
-    const { setYear } = this.props.pageActions
-    
     return (
-      <div className='row'>
-        <Page photos={page.photos} year={page.year} setYear={setYear} />
+      <div className='wrapper'>
+        <Main />
+        <Footer />
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    page: state.page
-  }
-}
-
-function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default App;

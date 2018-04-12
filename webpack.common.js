@@ -1,7 +1,7 @@
 const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
-const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   entry: {
@@ -12,70 +12,75 @@ module.exports = {
   },
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
-    publicPath: '/'
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new HtmlWebpackPlugin({
       title: '',
       template: './index.html',
     }),
+    new ExtractTextPlugin({
+      filename: 'style.css',
+      allChunks: true,
+      disable: false
+    }),
     new webpack.NamedModulesPlugin(),
     new webpack.NoEmitOnErrorsPlugin()
   ],
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.js$/,
-        loaders: ['babel-loader', 'eslint-loader'],
+        test: /\.(js|jsx)$/,
+        use: ['babel-loader', 'eslint-loader'],
         exclude: /node_modules/ 
       },
       {
-        test: /\.jsx$/,
-        loaders: ['babel-loader', 'eslint-loader'],
-        exclude: /node_modules/ 
+        test: /\.(scss|css)$/,
+        use: ['css-hot-loader'].concat(ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                url: true,
+                minimize: true,
+                sourceMap: false
+              }
+            }, 
+            {
+              loader: 'sass-loader',
+              options: {
+                sourceMap: false
+              }
+            }
+          ]
+        }))
       },
       {
-        test: /\.css$/,
+        test: /\.(png|svg|jpe?g|gif)$/,
         use: [
-          'style-loader',
-          'css-loader'
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [{
-            loader: "style-loader"
-        }, {
-            loader: "css-loader"
-        }, {
-            loader: "sass-loader"
-        }]
-    },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: './',
+              name: 'img/[hash].[ext]'
+            }
+          },
+          'img-loader'
         ]
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
         use: [
-          'file-loader'
+          {
+            loader: 'file-loader',
+            options: {
+              publicPath: './',
+              name: 'fonts/[name].[ext]'
+            }
+          }
         ]
-      },
-      {
-         test: /\.(csv|tsv)$/,
-         use: [
-           'csv-loader'
-         ]
-       },
-       {
-         test: /\.xml$/,
-         use: [
-           'xml-loader'
-         ]
-       }
+      }
     ]
   }
 };

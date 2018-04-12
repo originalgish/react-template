@@ -1,1 +1,0 @@
-react, webpack, react-router, redux template

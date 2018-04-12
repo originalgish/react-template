@@ -8,12 +8,20 @@ const name = 'dist';
 
 module.exports = merge(common, {
 devtool: 'inline-cheap-module-source-map',
+mode: 'production',
+performance: {
+  hints: false
+},
 plugins: [
     new CleanWebpackPlugin([name]),
     new UglifyJSPlugin({
       sourceMap: true,
       parallel: true,
-      cache: true
+      cache: true,
+      uglifyOptions: {
+        warnings: false,
+        compress: true
+      }
     }),
     new ZipPlugin({
       path: '../zip/',
