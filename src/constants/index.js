@@ -1,1 +1,1 @@
-export const SET_YEAR = 'SET_YEAR'
+export const SHOW_MODAL = 'SHOW_MODAL'

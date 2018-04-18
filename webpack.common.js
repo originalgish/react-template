@@ -52,7 +52,8 @@ module.exports = {
               options: {
                 sourceMap: false
               }
-            }
+            },
+            'postcss-loader'
           ]
         }))
       },
@@ -65,8 +66,7 @@ module.exports = {
               publicPath: './',
               name: 'img/[hash].[ext]'
             }
-          },
-          'img-loader'
+          }
         ]
       },
       {

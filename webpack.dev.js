@@ -14,7 +14,8 @@ module.exports = merge(common, {
   devServer: {
     stats: 'minimal',
     port: 3000,
-    hot: true
+    hot: true,
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()

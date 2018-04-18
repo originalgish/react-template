@@ -7,12 +7,12 @@ const common = require('./webpack.common.js');
 const name = 'dist';
 
 module.exports = merge(common, {
-devtool: 'inline-cheap-module-source-map',
-mode: 'production',
-performance: {
-  hints: false
-},
-plugins: [
+  devtool: 'inline-cheap-module-source-map',
+  mode: 'production',
+  performance: {
+    hints: false
+  },
+  plugins: [
     new CleanWebpackPlugin([name]),
     new UglifyJSPlugin({
       sourceMap: true,
@@ -20,12 +20,24 @@ plugins: [
       cache: true,
       uglifyOptions: {
         warnings: false,
-        compress: true
+        compress: {
+          drop_console: true
+        }
       }
     }),
     new ZipPlugin({
       path: '../zip/',
       filename: name + '.zip'
     })
-  ]
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.(png|svg|jpe?g|gif)$/,
+        use: [
+          'img-loader'
+        ]
+      }
+    ]
+  }
 });

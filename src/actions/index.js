@@ -1,8 +1,8 @@
-import { SET_YEAR } from '../constants'
+import { SHOW_MODAL } from '../constants'
 
-export function setYear(year) {
+export function showModal(modalName) {
   return {
-    type: SET_YEAR,
-    payload: year
+    type: SHOW_MODAL,
+    payload: modalName
   }
 }

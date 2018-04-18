@@ -1,18 +1,18 @@
-import { SET_YEAR } from '../constants'
+import { SHOW_MODAL } from '../constants';
 
 const initialState = {
-  year: 2016,
-  photos: []
-}
+  modalName: 0
+};
 
-export default function reducerMain(state = initialState, action) {
-
-  switch (action.type) {
-    case SET_YEAR:
-      return {...state, year: action.payload }
+export default function reducerMain(state = initialState, { type, payload }) {
+  switch (type) {
+    case SHOW_MODAL:
+      return {
+        ...state,
+        modalName: payload
+      };
 
     default:
       return state;
   }
-
 }

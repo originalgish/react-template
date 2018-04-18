@@ -20,12 +20,11 @@ const render = Component => {
       </Provider>
     </AppContainer>,
     document.getElementById('root')
-  )
-}
+  );
+};
 
 if (module.hot) {
   module.hot.accept('./routes', () => {
-    const MakeRoutes = require('./routes').default;
     render(MakeRoutes);
   });
 }
